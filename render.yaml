@@ -1,0 +1,45 @@
+services:
+  # --- Host Agent Service ---
+  - name: host-agent
+    type: web # 'web' rakha hai, agar yeh internal hai toh 'priv' kar dein
+    runtime: docker
+    repo: https://github.com/aditya-rai0/health-ease # Yahan apna GitHub repo URL check kar lein
+    rootDir: a2a_medical_coordinator/host_agent_adk
+    dockerfilePath: ./Dockerfile
+    # ENV variables yahan daalein ya Render Environment Group se link karein
+    # envVars:
+    #   - key: YOUR_ENV_KEY
+    #     value: YOUR_ENV_VALUE
+
+  # --- Cardiologist Agent Service ---
+  - name: cardiologist-agent
+    type: web
+    runtime: docker
+    repo: https://github.com/aditya-rai0/health-ease
+    rootDir: a2a_medical_coordinator/cardiologist_agent_langgraph
+    dockerfilePath: ./Dockerfile
+    # envVars:
+    #   - key: YOUR_ENV_KEY
+    #     value: YOUR_ENV_VALUE
+
+  # --- Neurologist Agent Service ---
+  - name: neurologist-agent
+    type: web
+    runtime: docker
+    repo: https://github.com/aditya-rai0/health-ease
+    rootDir: a2a_medical_coordinator/neurologist_agent_adk
+    dockerfilePath: ./Dockerfile
+    # envVars:
+    #   - key: YOUR_ENV_KEY
+    #     value: YOUR_ENV_VALUE
+
+  # --- Pulmonologist Agent Service ---
+  - name: pulmonologist-agent
+    type: web
+    runtime: docker
+    repo: https://github.com/aditya-rai0/health-ease
+    rootDir: a2a_medical_coordinator/pulmonologist_agent_crewai
+    dockerfilePath: ./Dockerfile
+    # envVars:
+    #   - key: YOUR_ENV_KEY
+    #     value: YOUR_ENV_VALUE
