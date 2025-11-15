@@ -1,8 +1,10 @@
+import os
 import asyncio
 import json
 import uuid
 from datetime import datetime
 from typing import Any, AsyncIterable, List
+
 
 import httpx
 import nest_asyncio
@@ -30,35 +32,6 @@ from .medical_scheduling_tools import (
     list_appointment_availabilities,
 )
 from .remote_agent_connection import RemoteAgentConnections
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 load_dotenv()
 nest_asyncio.apply()
 
@@ -249,11 +222,18 @@ def _get_initialized_host_agent_sync():
     """Synchronously creates and initializes the HostAgent."""
 
     async def _async_main():
+        neuro_url = os.getenv("NEUROLOGIST_AGENT_URL")
+        pulmo_url = os.getenv("PULMONOLOGIST_AGENT_URL")
+        cardio_url = os.getenv("CARDIOLOGIST_AGENT_URL")
+        if not all([neuro_url, pulmo_url, cardio_url]):
+            print("ERROR: Missing one or more agent URL environment variables.")
+            print("Please set NEUROLOGIST_AGENT_URL, PULMONOLOGIST_AGENT_URL, and CARDIOLOGIST_AGENT_URL")
+            return None
         # Hardcoded URLs for the specialist office agents
         specialist_agent_urls = [
-            "http://localhost:10002",  # Neurologist Agent
-            "http://localhost:10003",  # Pulmonologist Agent
-            "http://localhost:10004",  # Cardiologist Agent
+            neuro_url,  # Neurologist Agent
+            pulmo_url,  # Pulmonologist Agent
+            cardio_url,  # Cardiologist Agent
         ]
 
         print("initializing host agent")

@@ -32,8 +32,8 @@ class MissingAPIKeyError(Exception):
 
 def main():
     """Entry point for Pulmonologist's Scheduling Agent."""
-    host = "localhost"
-    port = 10003
+    host = "0.0.0.0"
+    port = int(os.getenv("PORT", 10004))
     try:
         if not os.getenv("GOOGLE_API_KEY"):
             raise MissingAPIKeyError("GOOGLE_API_KEY environment variable not set.")
