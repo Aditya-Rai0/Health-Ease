@@ -32,8 +32,8 @@ class MissingAPIKeyError(Exception):
 
 def main():
     """Starts the agent server."""
-    host = "0.0.0.0"
-    port = int(os.getenv("PORT", 10002))
+    host = "localhost"
+    port = 10002
     try:
         # Check for API key only if Vertex AI is not configured
         if not os.getenv("GOOGLE_GENAI_USE_VERTEXAI") == "TRUE":

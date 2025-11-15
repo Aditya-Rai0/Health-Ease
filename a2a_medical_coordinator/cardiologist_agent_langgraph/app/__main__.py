@@ -28,8 +28,9 @@ class MissingAPIKeyError(Exception):
 
 def main():
     """Starts Cardiologist's Agent server."""
-    host = "0.0.0.0"
-    port = int(os.getenv("PORT", 10004))
+    host = "localhost"
+    
+    port = 10004
     try:
         if not os.getenv("GOOGLE_API_KEY"):
             raise MissingAPIKeyError("GOOGLE_API_KEY environment variable not set.")
